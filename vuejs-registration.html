@@ -56,7 +56,7 @@
             <input type="password" class="form-control" v-model="confirm_password" />
           </div>
         </div>
-        <button type="submit" class="btn btn-default" v-bind:disabled="btn_disable()">Register</button>
+        <button type="submit" class="btn btn-default" v-bind:disabled="btn_disable">Register</button>
       </div>
     </div>
   </body>
@@ -75,7 +75,8 @@
         notification_msg: '',
         fullname : '',
         confirm_message:true,
-        confirm_notification: ''
+        confirm_notification: '',
+        btn_disable:true
       },
       watch:{
         password:function(){
@@ -83,31 +84,25 @@
           {
             this.notification_msg= 'Enter minimum of 6 characters',
             this.message = true
-            this.btn_disable(true)
+            //this.btn_disable=true
           }
           else
           {
             this.message = false
-           this.btn_disable(false)
+           this.btn_disable=false
           }
         },
         confirm_password: function(){
           if (this.password != this.confirm_password){
             this.confirm_notification= 'Enter Correct Password'
             this.confirm_message = true
-            this.btn_disable(true)
+            this.btn_disable=true
           }
           else
           {
             this.confirm_message = false
-           this.btn_disable(false)
+           this.btn_disable=false
           }
-        }
-      },
-      methods: {
-        btn_disable: function(value)
-        {
-          return value
         }
       }
     })

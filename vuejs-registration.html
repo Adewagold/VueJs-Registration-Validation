@@ -72,24 +72,27 @@
         password: '',
         confirm_password: '',
         message: false,
-        motification_msg: 'Enter minimum of 6 characters'
+        notification_msg: 'Enter minimum of 6 characters',
+        fullname : ''
       },
       watch:{
         password:function(){
           if(this.password.length < 6)
           {
-            btn_disable(true)
+            this.message = true
+            this.btn_disable(true)
           }
           else
           {
-           btn_disable(false)
+            this.message = false
+           this.btn_disable(false)
           }
         }
       },
       methods: {
         btn_disable: function(value)
         {
-          message = value
+          return value
         }
       }
     })

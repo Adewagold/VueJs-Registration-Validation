@@ -46,14 +46,14 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label>Password:</label>
-            <input type="text" class="form-control" v-model="password"/>
+            <label>Password: <span class="text-danger" v-show="message">{{notification_msg}}</label>
+            <input type="password" class="form-control" v-model="password"/>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label>Confirm Password: <span class="text-danger" v-show="message">{{notification_msg}}</span></label>
-            <input type="text" class="form-control" v-model="confirm_password" />
+            <label>Confirm Password: <span class="text-danger" v-show="confirm_message">{{confirm_notification}}</span></label>
+            <input type="password" class="form-control" v-model="confirm_password" />
           </div>
         </div>
         <button type="submit" class="btn btn-default" v-bind:disabled="btn_disable()">Register</button>
@@ -72,19 +72,34 @@
         password: '',
         confirm_password: '',
         message: false,
-        notification_msg: 'Enter minimum of 6 characters',
-        fullname : ''
+        notification_msg: '',
+        fullname : '',
+        confirm_message:true,
+        confirm_notification: ''
       },
       watch:{
         password:function(){
           if(this.password.length < 6)
           {
+            this.notification_msg= 'Enter minimum of 6 characters',
             this.message = true
             this.btn_disable(true)
           }
           else
           {
             this.message = false
+           this.btn_disable(false)
+          }
+        },
+        confirm_password: function(){
+          if (this.password != this.confirm_password){
+            this.confirm_notification= 'Enter Correct Password'
+            this.confirm_message = true
+            this.btn_disable(true)
+          }
+          else
+          {
+            this.confirm_message = false
            this.btn_disable(false)
           }
         }

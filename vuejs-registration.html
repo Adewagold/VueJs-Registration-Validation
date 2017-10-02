@@ -79,6 +79,18 @@
         btn_disable:true
       },
       watch:{
+        first: (){
+          if(this.last.length > 0)
+          {
+            this.last_notify = 'First name is required and must be more than 1 character'
+          }
+        },
+        last: (){
+          if(this.last.length > 0)
+          {
+            this.first_notify = 'First name is required and must be more than 1 character'
+          }
+        },
         password:function(){
           if(this.password.length < 6)
           {
